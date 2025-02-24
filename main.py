@@ -115,7 +115,7 @@ def main():
                         text = st.text_input(f"Edit {k}", value=v, key=f"input_{id}_{k}")
                         obj[k] = text
                         for lang in langs:
-                            t_v = " " 
+                            t_v = "" 
                             if item.get('translations', {}).get(lang, {}).get(k, None):
                                 t_v = item['translations'][lang][k]
 
@@ -128,7 +128,7 @@ def main():
 
                 # Update button
                 if st.button(f"Update (ID {id})", key=f"update_{id}"):
-                    update_data(selected_collection, id, obj)
+                    update_data(selected_collection, id, {k : v for k, v in obj.items() if v})
                 st.write(f"---------")
         else:
             st.warning("No data found in the selected collection.")
